@@ -2,39 +2,58 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Item extends CI_Controller {
+
+   public function __construct()
+   {
+      parent::__construct();
+      $this->load->model('Item_model');
+   }
+
   public function index()
   {
-    $this->load->model('Item_model');
     $data['items'] = $this->Item_model->getItems();
     $this->load->view('item', $data);
   }
-  public function view($item)
+  public function add()
   {
-    $this->load->model('Item_model');
-    $result = $this->Item_model->getItem($item);
-    $data['item'] = $result[0];
-    $this->load->view('Item_view', $data);
+    $this->load->view('Item_add');
   }
-  public function edit($item)
+
+  public function create()
   {
-    $this->load->model('Item_model');
-    $result = $this->Item_model->getItem($item);
-    $data['item'] = $result[0];
-    $this->load->view('Item_edit', $data);
-  }
-  public function edit_save($item)
-  {
-    $new_data = array(
-      'id' => $item,
+    $new_item = array(
       'name' => $this->input->post('name'),
       'description' => $this->input->post('description'),
       'price' => $this->input->post('price'),
     );
-    $this->load->model('Item_model');
-    $this->Item_model->updateItem($item, $new_data);
-    $result = $this->Item_model->getItem($item);
+    $id = $this->Item_model->save($new_item);
+    redirect('item/index/','refresh');  }
 
-    $this->view($item);
+  public function view($item)
+  {
+    $data['item'] = $this->Item_model->get_by_id($item)->row();
+    $this->load->view('Item_view', $data);
+  }
+  public function edit($id)
+  {
+    $data['item'] = $this->Item_model->get_by_id($id)->row();
+    $this->load->view('Item_edit', $data);
+  }
+  public function update()
+  {
+    $id = $this->input->post('id');
+    $updated_item = array(
+      'name' => $this->input->post('name'),
+      'description' => $this->input->post('description'),
+      'price' => $this->input->post('price'),
+    );
+    $this->Item_model->update($id, $updated_item);
+    $data['item'] = $this->Item_model->get_by_id($id)->row();
+    redirect('item/index/','refresh');
+  }
+  public function delete($id){
+    $this->Item_model->delete($id);
+    redirect('item/index/','refresh');
   }
 }
 

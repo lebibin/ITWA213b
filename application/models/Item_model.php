@@ -1,22 +1,32 @@
 <?php
 
 class Item_model extends CI_Model {
+   // table name
+  private $tbl_item = 'item';
   public function getItems()
   {
-    $q = $this->db->get('item');
+    $q = $this->db->get($this->tbl_item);
     $items = $q->result();
     return $items;
   }
-  public function getItem($item)
-  {
-    $q = $this->db->get_where('item', array('id' => $item));
-    $item = $q->result();
-    return $item;
+  // get item by id
+  function get_by_id($id){
+    $this->db->where('id', $id);
+    return $this->db->get($this->tbl_item);
   }
-  public function updateItem($item, $new_data)
-  {
-    $this->db->where('id', $new_data['id']);
-    $this->db->update('item', $new_data);
-    return true;
+  // add new item
+  function save($item){
+    $this->db->insert($this->tbl_item, $item);
+    return $this->db->insert_id();
+  }
+  // update item by id
+  function update($id, $item){
+    $this->db->where('id', $id);
+    $this->db->update($this->tbl_item, $item);
+  }
+  // delete item by id
+  function delete($id){
+    $this->db->where('id', $id);
+    $this->db->delete($this->tbl_item);
   }
 }

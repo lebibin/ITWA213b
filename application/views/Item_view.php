@@ -6,22 +6,39 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-
-<div class='well'>
-  <div class="row">
-    <div class="col-lg-3">
-      <h1>Name: <?php echo $item->name; ?></h1>
-      <p>Description: <?php echo $item->description; ?></p>
-      <div class="input-group">
-        Price:
-        <span class="input-group-addon">$</span>
-        <input type="text" class="form-control" value="<?php echo number_format($item->price, 2); ?>"placeholder="Username" disabled>
-      </div>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3">
+  <h1 class='text-center'>View item</h1>
   <hr>
-  <a href='<?php echo base_url() . 'item'; ?>'>&larr; Back</a>
+    <form action="" method='' class="form-horizontal">
+      <div class="form-group">
+        <label for="name" class="col-lg-2 control-label">ID</label>
+        <div class="col-lg-10">
+          <input type="text" disabled class="form-control" name="id" placeholder="ID" value="<?php echo $item->id ?>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name" class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+          <input type="text" disabled class="form-control" name="name" placeholder="Name" value="<?php echo $item->name?>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-lg-2 control-label">Description</label>
+        <div class="col-lg-10">
+          <input type="text" disabled class="form-control" name="description" placeholder="Description" value="<?php echo $item->description; ?>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price" class="col-lg-2 control-label">Price</label>
+        <div class="col-lg-10">
+          <input type="text" disabled class="form-control" name="price" placeholder="Price" value="<?php echo $item->price; ?>">
+        </div>
+      </div>
+    </form>
+    <hr>
+  <a href='<?php echo base_url() . 'item'; ?>' class='pull-right'>&larr; Back</a>
+  </div>
 </div>
-
 </body>
 </html>
