@@ -40,7 +40,7 @@
       </div>
     </form>
     <hr>
-  <a href='<?php echo base_url() . 'item'; ?>' class='pull-right'>&larr; Back</a>
+  <a href='<?php echo base_url() . 'item'; ?>'>&larr; Back</a>
   </div>
 </div>
 </body>
