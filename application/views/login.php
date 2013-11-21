@@ -25,7 +25,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Please sign in</h3>
-        </div>
+          </div>
           <div class="panel-body">
            <?php echo form_open('login/verify'); ?>
            <fieldset>
