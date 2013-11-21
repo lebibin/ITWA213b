@@ -49,6 +49,9 @@
             </fieldset>
             <?php echo form_close(); ?>
           </div>
+          <div class="panel-footer text-right">
+            <a href='registration'>Register</a>
+          </div>
         </div>
       </div>
     </div>

@@ -56,6 +56,9 @@
             </fieldset>
             <?php echo form_close(); ?>
           </div>
+          <div class="panel-footer text-right">
+            <a href='login'>Login</a>
+          </div>
         </div>
       </div>
     </div>
