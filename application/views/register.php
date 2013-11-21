@@ -19,12 +19,17 @@
         </div>
         <div class="panel-body">
           <?php echo validation_errors(); ?>
+          <?php
+           if(!$this->recaptcha->getIsValid()){
+            echo "The CAPTCHA failed.";
+           }
+          ?>
         </div>
       </div>
       <?php endif; ?>
       </div>
       <div class="clearfix"></div>
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Register an account</h3>
@@ -43,6 +48,9 @@
             </div>
             <div class="form-group">
              <input type="password" placeholder='Password Confirmation' size="20" id="password_confirmation" name="password_confirmation"class='form-control'/>
+            </div>
+            <div class="form-group">
+              <?php echo $recaptcha_html; ?>
             </div>
              <input class="btn btn-lg btn-success btn-block" type="submit" value="Register"/>
             </fieldset>

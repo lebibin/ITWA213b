@@ -12,6 +12,16 @@
 <div class="container">
     <div class="row">
     <div class="col-md-4 col-md-offset-4">
+    <?php if(isset($msg)): ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h3 class="panel-title">Notice</h3>
+        </div>
+        <div class="panel-body">
+          <?php echo $msg; ?>
+        </div>
+      </div>
+      <?php endif; ?>
       <?php if(validation_errors() != false): ?>
       <div class="panel panel-danger">
         <div class="panel-heading">

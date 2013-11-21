@@ -5,12 +5,15 @@ class Registration extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('user','',TRUE);
+   $this->load->library(array('recaptcha'));
+
  }
 
  function index()
  {
      $this->load->helper(array('form'));
-     $this->load->view('register');
+     $data['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
+     $this->load->view('register', $data);
  }
 
 
@@ -25,16 +28,17 @@ class Registration extends CI_Controller {
    $this->form_validation->set_rules('password_confirmation', 'Password Confirmation', 'trim|required|matches[password]');
    $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
 
-   if($this->form_validation->run() == FALSE)
+   if($this->form_validation->run() == FALSE && !$this->recaptcha->recaptcha_check_answer())
    {
-     //Field validation failed.  User redirected to registration page
-     $this->load->view('register');
+     $data['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
+     $this->load->view('register', $data);
    }
    else
    {
       $this->user->add_user();
       $this->send_email($this->input->post('email'));
-      redirect('login', 'refresh');
+      $data['msg'] = 'Successfully created an account!';
+     $this->load->view('login', $data);
    }
  }
 
